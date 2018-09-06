@@ -61,15 +61,45 @@ public class EmployeeLinkedList
         size++;
     }
 
-//    public Employee removeFromFront(){
-//
-//        size--;
-//    }
-//
-//    public Employee removeFromEnd(){
-//
-//        size--;
-//    }
+    public Employee removeFromFront(){
+
+        //if the list is empty; nothing to return
+        if (isEmpty())
+            return null;
+
+        //set tempHead to head
+        EmployeeNode tempHead = head;
+        //set head to the second item (making it the new head)
+        head = tempHead.prev;
+        //head points to null (nothing in front)
+        head.setNext(null);
+        //disconnecting the old head(tempHead) back pointer (not mandatory)
+        tempHead.setPrev(null);
+
+        size--;
+
+        return tempHead.getEmployee();
+    }
+
+    public Employee removeFromEnd(){
+
+        if (isEmpty())
+            return null;
+
+        EmployeeNode oldTail = tail;
+        //setting tail to the one before the last item
+        tail = oldTail.next;
+        //disconnecting tail's prev pointer
+        tail.setPrev(null);
+        //disconnecting the old tail's pointer
+        oldTail.setNext(null);
+
+        size--;
+
+        return oldTail.getEmployee();
+
+
+    }
 
     public boolean isEmpty(){
         return head == null;
